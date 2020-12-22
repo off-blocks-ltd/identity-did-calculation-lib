@@ -26,7 +26,7 @@
 
   <groupId>com.off-blocks</groupId>
   <artifactId>off-blocks-did-calculation</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1-SNAPSHOT</version>
   <name>Off-Blocks DID Base calculation</name>
   <description>DID Calculation and proof library for Off-Blocks</description>
 
