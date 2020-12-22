@@ -116,6 +116,13 @@ public interface DidSupport {
   }
 
 
+  /**
+   * Get the HMAC hex value based on the secret input key and the e-mail address
+   *
+   * @param emailAddress The e-mail address, will be converted to lower case
+   * @param hmacKey      The secret HMAC key of the user
+   * @return The HMAC hex value is it will be used in the identity chain
+   */
   static String getHmacHex(String emailAddress, String hmacKey) {
     if (isEmpty(emailAddress) || isEmpty(hmacKey)) {
       throw new IllegalArgumentException(
@@ -125,6 +132,12 @@ public interface DidSupport {
         .hmacHex(emailAddress.toLowerCase().trim());
   }
 
+  /**
+   * Convenience method to not have to rely on an external lib for empty string evaluation
+   *
+   * @param input The input to check
+   * @return whether the string is empty or not
+   */
   static boolean isEmpty(String input) {
     return input == null || "".equals(input.trim());
   }
