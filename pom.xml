@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Off-Blocks Identity chain and DID calculation support library
+  ~     Copyright (C) 2020 Off-Blocks Ltd.
+  ~
+  ~     This library is free software; you can redistribute it and/or
+  ~     modify it under the terms of the GNU Lesser General Public
+  ~     License as published by the Free Software Foundation; either
+  ~     version 2.1 of the License, or (at your option) any later version.
+  ~
+  ~     This library is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~     Lesser General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU Lesser General Public
+  ~     License along with this library; if not, write to the Free Software
+  ~     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+  ~     USA
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.off-blocks</groupId>
+  <artifactId>off-blocks-did-calculation</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>Off-Blocks DID Base calculation</name>
+  <description>DID Calculation and proof library for Off-Blocks</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <junit-jupiter.version>5.6.3</junit-jupiter.version>
+    <commons-codec.version>1.15</commons-codec.version>
+    <easy-blockchain-lib.version>0.1.3</easy-blockchain-lib.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>${commons-codec.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sphereon.public</groupId>
+      <artifactId>easy-blockchain-lib-main</artifactId>
+      <version>${easy-blockchain-lib.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit-jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>sphereon-public</id>
+      <name>Sphereon Public</name>
+      <url>https://nexus.qa.sphereon.com/repository/sphereon-public/</url>
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <repository>
+      <id>sphereon-opensource-releases</id>
+      <url>https://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-opensource-releases
+      </url>
+    </repository>
+    <snapshotRepository>
+      <id>sphereon-opensource-snapshots</id>
+      <url>https://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-opensource-snapshots
+      </url>
+    </snapshotRepository>
+  </distributionManagement>
+
+</project>
