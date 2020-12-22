@@ -28,52 +28,51 @@ import java.util.List;
  * versions
  */
 public enum Ledger {
-    FACTOM(FactomDidV1.INSTANCE);
+  FACTOM(FactomDidV1.INSTANCE);
 
-    private final List<DidSupport> didSupports;
+  private final List<DidSupport> didSupports;
 
-    Ledger(DidSupport... didSupports) {
-        this.didSupports = Arrays.asList(didSupports);
+  Ledger(DidSupport... didSupports) {
+    this.didSupports = Arrays.asList(didSupports);
+  }
+
+  /**
+   * Supported DID methods and versions on the specific ledger
+   *
+   * @return Supported DIDs
+   */
+  public List<DidSupport> getSupportedDids() {
+    return didSupports;
+  }
+
+  /**
+   * Get the supported DID implementation by spec version for this network. Please note this can be
+   * problematic if the network supports multiple different DID methods having overlapping versions
+   *
+   * @param specVersion The Spec version
+   * @return DID support
+   */
+  public DidSupport getSupportedDid(String specVersion) {
+    return getSupportedDids().stream()
+        .filter(didSupport -> didSupport.ledgerDidSpecVersion().equalsIgnoreCase(specVersion))
+        .findFirst().orElseThrow(() -> new IllegalArgumentException(
+            String.format("Version '%s' not supported on ledger %s", specVersion, name())));
+  }
+
+  /**
+   * Get the ledger based on the DID
+   *
+   * @param didSupport DID Support
+   * @return Ledger
+   */
+  public static Ledger fromSupportedDid(DidSupport didSupport) {
+    for (Ledger ledger : Ledger.values()) {
+      if (ledger.getSupportedDids().contains(didSupport)) {
+        return ledger;
+      }
     }
-
-    /**
-     * Supported DID methods and versions on the specific ledger
-     *
-     * @return Supported DIDs
-     */
-    public List<DidSupport> getSupportedDids() {
-        return didSupports;
-    }
-
-    /**
-     * Get the supported DID implementation by spec version for this network. Please note this can
-     * be problematic if the network supports multiple different DID methods having overlapping
-     * versions
-     *
-     * @param specVersion The Spec version
-     * @return DID support
-     */
-    public DidSupport getSupportedDid(String specVersion) {
-        return getSupportedDids().stream()
-            .filter(didSupport -> didSupport.ledgerDidSpecVersion().equalsIgnoreCase(specVersion))
-            .findFirst().orElseThrow(() -> new IllegalArgumentException(
-                String.format("Version '%s' not supported on ledger %s", specVersion, name())));
-    }
-
-    /**
-     * Get the ledger based on the DID
-     *
-     * @param didSupport DID Support
-     * @return Ledger
-     */
-    public static Ledger fromSupportedDid(DidSupport didSupport) {
-        for (Ledger ledger : Ledger.values()) {
-            if (ledger.getSupportedDids().contains(didSupport)) {
-                return ledger;
-            }
-        }
-        throw new IllegalArgumentException(
-            String.format("DID method %s not supported by any known ledger implementation",
-                didSupport));
-    }
+    throw new IllegalArgumentException(
+        String.format("DID method %s not supported by any known ledger implementation",
+            didSupport));
+  }
 }

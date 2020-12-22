@@ -29,33 +29,43 @@ package com.offblocks.did.calc;
  * </ul>
  */
 public enum IdentityType {
-    /**
-     * Off-Blocks Managed/Web identity
-     */
-    MANAGED(Discriminator.MANAGED),
+  /**
+   * Off-Blocks Managed/Web identity
+   */
+  MANAGED(Discriminator.MANAGED),
 
-    /**
-     * Device identity, private keyPair in protected storage on the device
-     */
-    DEVICE(Discriminator.DEVICE);
+  /**
+   * Device identity, private keyPair in protected storage on the device
+   */
+  DEVICE(Discriminator.DEVICE);
 
-    private final String discriminator;
+  private final String discriminator;
 
-    IdentityType(String discriminator) {
-        this.discriminator = discriminator;
-    }
+  /**
+   * Constructor
+   *
+   * @param discriminator The discriminator value for JPA
+   */
+  IdentityType(String discriminator) {
+    this.discriminator = discriminator;
+  }
 
-    public String discriminator() {
-        return discriminator;
-    }
+  /**
+   * Get the discriminator as a static string for JPA
+   *
+   * @return The discriminator value
+   */
+  public String discriminator() {
+    return discriminator;
+  }
 
-    /**
-     * Here since we use types/discriminators in JPA/persistence which can only be static strings in
-     * Java Annotations and we want to use enums in other classes
-     */
-    public interface Discriminator {
+  /**
+   * Here since we use types/discriminators in JPA/persistence which can only be static strings in
+   * Java Annotations and we want to use enums in other classes
+   */
+  public interface Discriminator {
 
-        String MANAGED = "MANAGED";
-        String DEVICE = "DEVICE";
-    }
+    String MANAGED = "MANAGED";
+    String DEVICE = "DEVICE";
+  }
 }

@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 
 public class FactomDidV1 implements DidSupport {
 
+
   public static final String FACTOM_DID_SPEC_VERSION = "1.0";
   public static final String FACTOM = "factom";
   protected static final String TESTNET = "testnet";
@@ -42,6 +43,9 @@ public class FactomDidV1 implements DidSupport {
   private FactomDidV1() {
   }
 
+  /**
+   * This class represents the External Ids as known on the Factom Blockchain
+   */
   public static class ExternalIds {
 
     public static final String OFFBLOCKS = "Off-Blocks";
@@ -49,6 +53,13 @@ public class FactomDidV1 implements DidSupport {
     public static final String IDENTITY_CHAIN = "IdentityChain";
     public static final String MANAGED = "web";
 
+    /**
+     * Construct a list of external Ids based on the HMAC hex value and the identity type
+     *
+     * @param hmacHex This is the HMAC hex from the e-mail address and HMAC secret key
+     * @param type    The identity type
+     * @return The list of external Ids
+     */
     public static List<String> constructIdentity(final String hmacHex, IdentityType type) {
       if (isEmpty(hmacHex)) {
         throw new IllegalArgumentException(
@@ -71,12 +82,22 @@ public class FactomDidV1 implements DidSupport {
 
   }
 
+  /**
+   * The Entry (body) value support for Identity chains on Factom
+   */
   public static class Entry {
+
 
     public static final long IDENTITY_VERSION = 1;
 
   }
 
+  /**
+   * Returns the DID method part of a DID based on the network name
+   *
+   * @param networkName The blockchain network name
+   * @return The DID method
+   */
   public String didMethod(String networkName) {
     switch (networkName(networkName)) {
       case MAINNET:
